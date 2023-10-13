@@ -1,9 +1,10 @@
-import ItemListContainer from "./ItemListContainer"
+import ItemListContainer from "../itemListContainer/itemListContainer"
+
 const Home = () => {
     const greeting = 'Bienvenido a la disquería'
     return(
         <div>
-            <ItemListContainer greeting= {greeting}/>
+            <ItemListContainer greeting={greeting}/>
         </div>
     )
 }
