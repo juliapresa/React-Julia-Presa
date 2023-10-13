@@ -1,5 +1,6 @@
 import CartWidget from "../CartWidget/cartWidget"
 import Titulo from "../titulo/titulo"
+import 'bootstrap/dist/css/bootstrap.min.css';
 function NavBar(){
     return(
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
