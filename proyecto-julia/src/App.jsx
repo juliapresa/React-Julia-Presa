@@ -1,22 +1,12 @@
+import Home from './components/home/home'
+import NavBar from './components/navBar/navBar'
 import './App.css'
-
 function App() {
   return (
     <>
     <NavBar />
+    <Home />
     </>
-  )
-}
-function NavBar(){
-  return(
-    <nav>
-      <ul>
-        <li>Inicio</li>
-        <li>CDS</li>
-        <li>Vinilos</li>
-        <li>Contacto</li>
-      </ul>
-    </nav>
   )
 }
 
