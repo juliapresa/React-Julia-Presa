@@ -1,6 +1,7 @@
+import './titulo.css'
 function Titulo(){
     return(
-        <h1>
+        <h1 className="titulo">
            DISQUERÍA
         </h1>
     )
