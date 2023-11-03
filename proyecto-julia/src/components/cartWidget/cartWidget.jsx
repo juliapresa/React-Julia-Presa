@@ -1,6 +1,7 @@
+import imagen from '../../assets/carrito.svg'
 const CartWidget = () => {
     return(
-        <div>4🛒</div>
+        <img className='carrito' src={imagen}/>
     )
 }
 export default CartWidget

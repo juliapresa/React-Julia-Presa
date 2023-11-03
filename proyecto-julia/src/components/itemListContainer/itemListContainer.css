@@ -1,0 +1,29 @@
+.divCards{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 5%;
+}
+.card{
+    display: flex;
+    width: fit-content;
+    flex-direction: row;
+  }
+  .title{
+    font-size: x-large;
+    text-align: center;
+  }
+  .card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .carrito{
+    width: 10%;
+    height: 30px;
+  }
+  .img{
+    width: 300px;
+    height: 300px;
+  }
