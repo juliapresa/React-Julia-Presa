@@ -8,10 +8,10 @@ const products = [
     {id:4,"title": "LOADED","artist": 'The Velvet Underground',"price": 450, imageUrl: 'https://upload.wikimedia.org/wikipedia/en/7/71/Loadedalbum.jpg', category: 'CDS'},
     {id:5,"title": "TRANSFORMER","artist": 'Lou Reed',"price": 400, imageUrl: 'https://upload.wikimedia.org/wikipedia/en/f/f1/Loureedtransformer.jpeg', category: 'CDS'}
 ]
-export const mFetch = () =>{
+export const mFetch = (id) =>{
     return new Promise ((res)=>{
        setTimeout(()=>{
-        res(products)
+        res(id ? products.find(prod.id === id):products)
        }, 1000)
     }) 
 }

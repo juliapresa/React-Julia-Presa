@@ -2,10 +2,7 @@ import {Link, useParams} from 'react-router-dom'
 import { useContext, useEffect, useState } from "react"
 import { mFetch } from "../../helpers/mfetch"
 import "./itemList.css"
-import { AppContext } from '../../App'
 const ItemList = () => {
-    const datosContext = useContext(AppContext)
-    console.log (datosContext)
     const [products, setProducts] = useState([])
     const {sid} =useParams()
     useEffect(()=>{
