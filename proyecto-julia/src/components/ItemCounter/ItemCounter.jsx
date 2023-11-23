@@ -4,16 +4,12 @@ export const ItemCounter = ({ initial, onAdd }) => {
     const [quantity, setQuantity] = useState(initial);
 
     const handleAdd = () => {
-        const newQuantity = quantity + 1;
-        setQuantity(newQuantity);
-        onAdd(newQuantity);
+        setQuantity(quantity + 1);
     };
 
     const handleRemove = () => {
         if (quantity > 1) {
-            const newQuantity = quantity - 1;
-            setQuantity(newQuantity);
-            onAdd(newQuantity);
+            setQuantity(quantity - 1);
         }
     };
 
@@ -23,6 +19,7 @@ export const ItemCounter = ({ initial, onAdd }) => {
             <button onClick={handleAdd}>+</button>
             <button onClick={handleRemove}>-</button>
             <p>Cantidad: {quantity}</p>
+            <button onClick={() => onAdd(quantity)}>Agregar al carrito</button>
         </div>
     );
 };

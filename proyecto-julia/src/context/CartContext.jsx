@@ -3,9 +3,16 @@ export const CartContext = createContext ([]);
 export const CartContextProvider = ({children}) => {
     const [cartList, setCartList]= useState([]) 
     const addCart = (product) => {
-        setCartList([...cartList,product])
-        
-    } 
+        const existingProductIndex = cartList.findIndex(item => item.id === product.id);
+        if (existingProductIndex !== -1) {
+            const updatedCart = [...cartList];
+            updatedCart[existingProductIndex].quantity += product.quantity;
+            setCartList(updatedCart);
+        } else {
+            setCartList([...cartList, product]);
+        }
+    }
+    
     const removeCart = () => {setCartList([])}
     //funcion precio total
     //funcion cantidad de productos en total
