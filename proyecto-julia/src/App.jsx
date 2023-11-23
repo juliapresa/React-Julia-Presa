@@ -5,7 +5,9 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import { CartContextProvider } from './context/CartContext';
 import { Checkout } from './components/Checkout/Checkout';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { createContext } from 'react';
 function App() {
+
   return (
     <CartContextProvider>
     <BrowserRouter>

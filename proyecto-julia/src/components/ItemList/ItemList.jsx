@@ -1,21 +1,6 @@
-import {Link, useParams} from 'react-router-dom'
-import { useContext, useEffect, useState } from "react"
-import { mFetch } from "../../helpers/mfetch"
+import {Link} from 'react-router-dom'
 import "./itemList.css"
-const ItemList = () => {
-    const [products, setProducts] = useState([])
-    const {sid} =useParams()
-    useEffect(()=>{
-        if (sid){
-            mFetch()
-            .then(result => setProducts(result.filter(product => product.category===sid)))
-            .catch (error => console.log(error))
-        }else{
-            mFetch()
-            .then(result => setProducts(result))
-            .catch (error => console.log(error))
-        }
-    }, [sid])
+const ItemList = ({products}) => {
     return(
          <div className="divCards">
             {products.map(product => <div className="card">                       

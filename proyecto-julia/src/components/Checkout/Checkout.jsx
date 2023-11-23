@@ -2,16 +2,16 @@ import { useContext } from 'react'
 import CartContext from '../../context/CartContext'
 import "./checkout.css"
 export const Checkout = () =>{
-    const {cartList, removeCart} = useContext(CartContext)
+    const {cartList, removeCart, removeCartItem} = useContext(CartContext)
     console.log (cartList)
     return(
         <div>
             {cartList.map(product => 
-            <div>
+            <div key={product.id}>
                 Producto: {product.name},
                 Precio: {product.price}
                 Cantidad: {product.quantity}
-                <button>Quitar</button>
+                <button onClick={() => removeCartItem(product.id)}>Quitar</button>
                 </div>
             )}
         Precio total:
