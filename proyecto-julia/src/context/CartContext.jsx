@@ -14,13 +14,13 @@ export const CartContextProvider = ({children}) => {
     }
     
     const removeCart = () => {setCartList([])}
+    setEmptyCart(true);
     //funcion precio total
     //funcion cantidad de productos en total
-    //eliminar por producto
- 
     const removeCartItem = (productId) => {
         const updatedCart = cartList.filter(item => item.id !== productId);
         setCartList(updatedCart);
+        setEmptyCart(cartList.length === 1);
     }
     return(
         <CartContext.Provider value={{cartList,addCart, removeCart, removeCartItem}}>{children}</CartContext.Provider>

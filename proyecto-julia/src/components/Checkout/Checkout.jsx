@@ -1,22 +1,40 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import CartContext from '../../context/CartContext'
+import { Link } from 'react-router-dom';
 import "./checkout.css"
 export const Checkout = () =>{
     const {cartList, removeCart, removeCartItem} = useContext(CartContext)
-    console.log (cartList)
+    const [emptyCart, setEmptyCart]= useState(true)
+    const Empty = ()=>{
+        return (
+            <>
+            <p>El carrito esta vacío</p>
+            <Link to='/detail/'>Volver a los productos</Link>
+            </>
+        )
+    }
+    useEffect(() => {
+        setEmptyCart(cartList.length === 0);
+      }, []);
     return(
-        <div>
-            {cartList.map(product => 
-            <div key={product.id}>
-                Producto: {product.name},
-                Precio: {product.price}
-                Cantidad: {product.quantity}
-                <button onClick={() => removeCartItem(product.id)}>Quitar</button>
-                </div>
-            )}
-        Precio total:
-        <button onClick={removeCart}>Vaciar carrito</button>
-        <button>Terminar compra</button>
-        </div>
+        <>
+        {emptyCart ? <Empty/>
+            :
+               <div className='divCheckout'>
+               {cartList.map(product => 
+               <div className='divDataCheckout' key={product.id}>
+                   <p>Producto: {product.title}</p>
+                   <p>Precio: {product.price}</p>
+                   <p>Cantidad: {product.quantity}</p>
+                   <img src={product.imageUrl} className="card-img-top img"/>
+                   <button className='buttonCheckout' onClick={() => removeCartItem(product.id)}>Quitar</button>
+                   </div>
+               )}
+           <button className='buttonCheckout' onClick={removeCart}>Vaciar carrito</button>
+           <button className='buttonCheckout'>Terminar compra</button>
+           <p className='precioTotal'>Precio total:</p>
+           </div>
+             }
+        </>
     )
 }

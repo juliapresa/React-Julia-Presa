@@ -1,0 +1,17 @@
+.divCheckout{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.buttonCheckout{
+    text-align: center;
+    margin-top: 2%;
+}
+.precioTotal{
+    text-align: center;
+}
+.divDataCheckout{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
