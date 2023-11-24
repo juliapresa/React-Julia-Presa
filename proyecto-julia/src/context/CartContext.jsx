@@ -12,18 +12,25 @@ export const CartContextProvider = ({children}) => {
             setCartList([...cartList, product]);
         }
     }
-    
     const removeCart = () => {setCartList([])}
-    setEmptyCart(true);
-    //funcion precio total
-    //funcion cantidad de productos en total
+
+    const totalPrice = () => {
+        return cartList.reduce((total, product) => {
+            return total + product.price * product.quantity;
+        }, 0).toFixed(2);
+    };
+    const totalQuantity = () => {
+        return cartList.reduce((total, product) => {
+            return total + product.quantity;
+        }, 0);
+    };
+
     const removeCartItem = (productId) => {
         const updatedCart = cartList.filter(item => item.id !== productId);
         setCartList(updatedCart);
-        setEmptyCart(cartList.length === 1);
     }
     return(
-        <CartContext.Provider value={{cartList,addCart, removeCart, removeCartItem}}>{children}</CartContext.Provider>
+        <CartContext.Provider value={{cartList,addCart, removeCart, removeCartItem, totalPrice, totalQuantity}}>{children}</CartContext.Provider>
         )
 }
 export default CartContext

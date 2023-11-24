@@ -3,7 +3,7 @@ import CartContext from '../../context/CartContext'
 import { Link } from 'react-router-dom';
 import "./checkout.css"
 export const Checkout = () =>{
-    const {cartList, removeCart, removeCartItem} = useContext(CartContext)
+    const {cartList, removeCart, removeCartItem, totalPrice, totalQuantity} = useContext(CartContext)
     const [emptyCart, setEmptyCart]= useState(true)
     const Empty = ()=>{
         return (
@@ -32,7 +32,8 @@ export const Checkout = () =>{
                )}
            <button className='buttonCheckout' onClick={removeCart}>Vaciar carrito</button>
            <button className='buttonCheckout'>Terminar compra</button>
-           <p className='precioTotal'>Precio total:</p>
+           <p className='precioTotal'>Precio total: {totalPrice()}</p>
+           <p className='precioTotal'>Cantidad total: {totalQuantity()}</p>
            </div>
              }
         </>
