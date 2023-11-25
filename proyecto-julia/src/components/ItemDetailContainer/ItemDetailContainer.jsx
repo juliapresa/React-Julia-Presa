@@ -1,7 +1,6 @@
 import React from "react"
 import { useEffect, useState} from "react"
 import { useParams } from "react-router-dom"
-import { mFetchId } from "../../helpers/mfetch"
 import ItemDetail from "../ItemDetail/ItemDetail"
 import { doc, getDoc, getFirestore } from "firebase/firestore"
 
@@ -12,6 +11,7 @@ function ItemDetailContainer ({}){
   const Loading = ()=>{
       return <h3>Cargando</h3>
   }
+
 useEffect(() => {
 setLoading(true);
 const dbFirestore = getFirestore()

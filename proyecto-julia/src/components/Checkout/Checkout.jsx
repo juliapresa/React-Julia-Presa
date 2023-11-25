@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import CartContext from '../../context/CartContext'
 import { Link } from 'react-router-dom';
+import {addDoc, collection, getFirestore} from 'firebase/firestore'
 import "./checkout.css"
 export const Checkout = () =>{
     const {cartList, removeCart, removeCartItem, totalPrice, totalQuantity} = useContext(CartContext)
@@ -16,6 +17,18 @@ export const Checkout = () =>{
     useEffect(() => {
         setEmptyCart(cartList.length === 0);
       }, []);
+    
+    const finalOrder = ()=>{
+        const order = {}
+        order.buyer = {name: 'julia', phone:'3093039', email:'soyunemail@gmail.com'}
+        order.products = cartList.map(({id, price, title})=> ({id: id, price: price, title: title}))
+        order.total = totalPrice()
+        const db = getFirestore()
+        const queryCollection = collection(db, 'orders')
+        addDoc(queryCollection, order)
+        .then(res =>console.log(res))
+        .catch(err=>console.log(err))
+    } 
     return(
         <>
         {emptyCart ? <Empty/>
@@ -31,7 +44,7 @@ export const Checkout = () =>{
                    </div>
                )}
            <button className='buttonCheckout' onClick={removeCart}>Vaciar carrito</button>
-           <button className='buttonCheckout'>Terminar compra</button>
+           <button className='buttonCheckout' onClick={finalOrder}>Terminar compra</button>
            <p className='precioTotal'>Precio total: {totalPrice()}</p>
            <p className='precioTotal'>Cantidad total: {totalQuantity()}</p>
            </div>
