@@ -2,7 +2,7 @@
   "name": "proyecto-julia",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "module", 
   "scripts": {
     "start": "react-scripts start",
     "dev": "vite",

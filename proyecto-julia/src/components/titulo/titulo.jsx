@@ -1,9 +1,9 @@
 import './titulo.css'
-function Titulo(){
+function Title(){
     return(
-        <h1 className="titulo">
+        <h1 className="title">
            DISQUERÍA
         </h1>
     )
 }
-export default Titulo
+export default Title

@@ -1,12 +1,15 @@
-import icon from '../../assets/fontCarrito.svg'
 import { Link } from 'react-router-dom'
+
+import icon from '../../assets/fontCarrito.svg'
+
 import "./cartWidget.css"
+
 const CartWidget = () => {
     return(
         <div>
-               <Link to={`/checkout/`}>
-                <img className='carrito' src={icon}/>
-                </Link>
+            <Link to={`/checkout/`}>
+                <img className='cart' src={icon}/>
+            </Link>
         </div>
     )
 }
