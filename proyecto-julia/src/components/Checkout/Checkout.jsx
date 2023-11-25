@@ -7,7 +7,13 @@ import CartContext from '../../context/CartContext'
 import "./checkout.css"
 export const Checkout = () =>{
     const {cartList, removeCart, removeCartItem, totalPrice, totalQuantity} = useContext(CartContext)
+    const [theId, setTheId] = useState('')
     const [emptyCart, setEmptyCart]= useState(true)
+    const [form, setForm] = useState({
+        names: '',
+        phone: '',
+        mail: ''
+    })
     const Empty = ()=>{
         return (
             <>
@@ -23,33 +29,63 @@ export const Checkout = () =>{
     
     const finalOrder = ()=>{
         const order = {}
-        order.buyer = {name: 'julia', phone:'3093039', email:'soyunemail@gmail.com'}
+        order.buyer = FormData
         order.products = cartList.map(({id, price, title})=> ({id: id, price: price, title: title}))
         order.total = totalPrice()
         const db = getFirestore()
         const queryCollection = collection(db, 'orders')
         addDoc(queryCollection, order)
-        .then(res =>console.log(res))
+        .then(({id}) =>setTheId(id))
         .catch(err=>console.log(err))
+        .finally(()=>setForm({
+            name: '',
+            phone: '',
+            mail: ''
+        }
+        ))
     } 
+
+    const formForm = (evt) =>{
+        setForm({
+            ...form,
+            [evt.target.name]: evt.target.value
+        })
+    }
     return(
         <>
+            {theId !== '' && <p>El id es{theId}</p>}
             {emptyCart ? <Empty/>
                 :
-                <div className='divCheckout'>
+                <div>
+                    <div className='divCheckout'>
                     {cartList.map(product => 
                         <div className='divDataCheckout' key={product.id}>
                             <p>Producto: {product.title}</p>
                             <p>Precio: {product.price}</p>
                             <p>Cantidad: {product.quantity}</p>
                             <img src={product.imageUrl} className="card-img-top img"/>
-                            <button className='buttonCheckout' onClick={() => removeCartItem(product.id)}>Quitar</button>
+                            <button className='buttonRemove' onClick={() => removeCartItem(product.id)}>Quitar</button>
                         </div>
                     )}
-                    <button className='buttonCheckout' onClick={removeCart}>Vaciar carrito</button>
-                    <button className='buttonCheckout' onClick={finalOrder}>Terminar compra</button>
-                    <p className='totalPrice'>Precio total: {totalPrice()}</p>
-                    <p className='totalPrice'>Cantidad total: {totalQuantity()}</p>
+                    </div>
+                    <div className='divInfoForm'>
+                    <div className='divInfo col-md-6 col-sm-12'>
+                        {totalPrice()!==0 && <p className='totalPrice'>Precio total: {totalPrice()}</p>}
+                        {totalQuantity()!==0 && <p className='totalPrice'>Cantidad total: {totalQuantity()}</p>}
+                        <button className='buttonEmpty' onClick={removeCart}>Vaciar carrito</button>
+                    </div>
+                    <div className='divForm col-md-6 col-sm-12'>
+                    <form className='form' onSubmit={finalOrder}>
+                        <label>Nombre:</label>
+                        <input type="text" name="names" onChange={formForm} required value={FormData.names}/>
+                        <label>Numero:</label>
+                        <input type="text" name="phone" onChange={formForm} required value={FormData.phone}/>
+                        <label>Mail:</label>
+                        <input type="text" name="mail" onChange={formForm} required value={FormData.mail}/>
+                        <button className='buttonCheckout' onClick={finalOrder}>Terminar compra</button>
+                    </form>
+                    </div>
+                    </div>
                 </div>
             }
         </>
