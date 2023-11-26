@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {addDoc, collection, getFirestore} from 'firebase/firestore'
 
 import CartContext from '../../context/CartContext'
+import TheForm from '../Form/Form';
 
 import "./checkout.css"
 export const Checkout = () =>{
@@ -74,17 +75,7 @@ export const Checkout = () =>{
                         {totalQuantity()!==0 && <p className='totalPrice'>Cantidad total: {totalQuantity()}</p>}
                         <button className='buttonEmpty' onClick={removeCart}>Vaciar carrito</button>
                     </div>
-                    <div className='divForm col-md-6 col-sm-12'>
-                    <form className='form' onSubmit={finalOrder}>
-                        <label>Nombre:</label>
-                        <input type="text" name="names" onChange={formForm} required value={FormData.names}/>
-                        <label>Numero:</label>
-                        <input type="text" name="phone" onChange={formForm} required value={FormData.phone}/>
-                        <label>Mail:</label>
-                        <input type="text" name="mail" onChange={formForm} required value={FormData.mail}/>
-                        <button className='buttonCheckout' onClick={finalOrder}>Terminar compra</button>
-                    </form>
-                    </div>
+                    <TheForm form={form} formForm={formForm} finalOrder={finalOrder} />
                     </div>
                 </div>
             }
